@@ -13,7 +13,17 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (err, client) => {
     //deleteOne
     //findAndDeleteOne
 
-    db.collection('Todos').deleteMany({text:'Eat lunch'}).then((count) =>{
+    db.collection('Todos').findOneAndUpdate(
+        {
+            _id: new ObjectID('5d6e92e9a41f726d67fb0db8')
+        },{
+            $set: {
+                completed: true
+            }
+        },{
+            returnOriginal : false
+        }
+    ).then(( count ) =>{
         console.log(count);
     }, (err) => {
         console.log('Unable to fetch todos', err);
